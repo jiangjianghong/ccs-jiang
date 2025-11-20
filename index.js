@@ -343,7 +343,8 @@ function processSelectedConfig(selectedConfig) {
               // 启动 Claude
               const claudeProcess = spawn('claude', [], {
                 stdio: 'inherit',
-                cwd: process.cwd()
+                cwd: process.cwd(),
+                shell: true
               });
               
               claudeProcess.on('error', (error) => {
@@ -502,11 +503,24 @@ function openConfigFile(filePath) {
   }
   
   console.log(chalk.cyan(`正在打开: ${fullPath}`));
-  
-  // 使用spawn执行open命令
-  const child = spawn('open', [fullPath], { 
+
+  // 根据平台选择打开命令
+  let command, args;
+  if (process.platform === 'win32') {
+    command = 'cmd';
+    args = ['/c', 'start', '""', fullPath];
+  } else if (process.platform === 'darwin') {
+    command = 'open';
+    args = [fullPath];
+  } else {
+    command = 'xdg-open';
+    args = [fullPath];
+  }
+
+  const child = spawn(command, args, {
     stdio: 'inherit',
-    detached: true 
+    detached: true,
+    shell: process.platform === 'win32'
   });
   
   child.on('error', (error) => {

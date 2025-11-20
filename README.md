@@ -2,9 +2,8 @@
 
 一个用于在不同的Claude API配置之间进行切换的命令行工具。
 
-[ClaudeCode API 站点推荐](https://github.com/AlvinScrp/claude-code-switch/blob/main/ClaudeCode%20API%E7%AB%99.md)
+**增加对windows系统的支持**
 
-**强烈推荐这个**倍率高5块钱相当于10美金 ：[https://instcopilot-api.com/register?aff=J2wX](https://instcopilot-api.com/register?aff=J2wX)
 
 ## 安装
 
